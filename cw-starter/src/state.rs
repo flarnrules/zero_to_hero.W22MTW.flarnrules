@@ -5,25 +5,25 @@ use cosmwasm_std::Addr;
 use cw_storage_plus::{Item, Map};
 
 // Create Config struct with poll admin
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
 pub struct Config {
-   pub admin: Addr
+    pub admin: Addr,
 }
 
 // Create Poll struct with creator, question, and options
 // Derive JSON serialization
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
 pub struct Poll {
-   pub creator: Addr,
-   pub question: String,
-   pub options: Vec<(String, u64)>,
+    pub creator: Addr,
+    pub question: String,
+    pub options: Vec<(String, u64)>,
 }
 
 // Create Ballot struct with option
 // Derive JSON serialization
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
 pub struct Ballot {
-   pub option: String,
+    pub option: String,
 }
 
 pub const CONFIG: Item<Config> = Item::new("config");
@@ -34,4 +34,3 @@ pub const POLLS: Map<String, Poll> = Map::new("polls");
 
 // A map with a Addr key and string value
 pub const BALLOTS: Map<(Addr, String), Ballot> = Map::new("ballots");
-
